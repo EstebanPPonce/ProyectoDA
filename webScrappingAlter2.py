@@ -30,7 +30,12 @@ soup = BeautifulSoup(r.text, 'html.parser')
 
 listaFeatures = soup.find_all('div',{'class': 'inline-flex align-baseline2 col-10'})
 
+
+
 for i in listaFeatures:
 	print(i.text.strip())
+
+
+asd = 2
 
 
