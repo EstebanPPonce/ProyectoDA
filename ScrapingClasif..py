@@ -9,11 +9,18 @@ def ams(dataArr):
     datar = {}
     for atm in dataArr: 
         id += 1
+
+        if 'FichaInmueble_dormitorios' not in dataArr:
+            datar['dorm'] = 'sin datos'
+        if 'FichaInmueble_bano' not in dataArr:
+            datar['ban'] = 'sin datos'
+        if 'FichaInmueble_superficie' not in dataArr:
+            datar['sup'] = 'sin datos'
       
         if atm == 'FichaInmueble_dormitorios':
             datar['dorm'] = dataArr[id] 
         if atm == 'FichaInmueble_bano':
-            datar['ban'] = dataArr[id] 
+            datar['ban'] = dataArr[id]
         if atm == 'FichaInmueble_superficie':
             datar['sup'] = dataArr[id]
         
@@ -21,7 +28,7 @@ def ams(dataArr):
 
 links ='https://clasificados.lavoz.com.ar/inmuebles/departamentos?list=true&provincia=cordoba&ciudad=cordoba&apto-credito=no&operacion=venta&precio-desde=10000&moneda=dolares&tipo-de-unidad=departamento&page='
 data_list = []
-for link in range(1,4):
+for link in range(1,3):
 
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0','encode': 'utf-8'}
@@ -40,11 +47,11 @@ for link in range(1,4):
     for item in publicaciones:
         
       #  titulo   = item.find('div', {'class': 'bold mx0 mt0 pt1 col-12 title-2lines-list h2'}).text
-      #  print(titulo)
+      
         precio   = item.find('span', {'class': 'price'}).text
         link     = item.find('a', {'class': 'text-decoration-none'})['href']
         dataDpto = item.find('div', {'class': 'items-center'}).text.split(" ")
-        #ubicacion = item.find('span', {'class': 'h4'})
+        
         try:
             ubicacion = item.find('span', {'class': 'h4'}).text
         except:
@@ -65,4 +72,3 @@ for link in range(1,4):
     df_final = pd.concat(data_list)
 
 print(df_final)
-#print(len(publicaciones))
