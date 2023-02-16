@@ -46,7 +46,7 @@ for link in range(1,3):
     
     for item in publicaciones:
         
-      #  titulo   = item.find('div', {'class': 'bold mx0 mt0 pt1 col-12 title-2lines-list h2'}).text
+        titulo   = item.find('div', {'class': 'bold mx0 mt0 pt1 col-12 title-2lines-list h2'}).text
       
         precio   = item.find('span', {'class': 'price'}).text
         link     = item.find('a', {'class': 'text-decoration-none'})['href']
@@ -57,7 +57,7 @@ for link in range(1,3):
         except:
             ubicacion = 'sin ubicacion'
         extradata = ams(dataDpto)
-      #  data_item['titulo'] = titulo.encode('utf8').strip()[:15]
+        data_item['titulo'] = titulo.encode('utf8').strip()[:15]
         data_item['precio'] = precio.strip()
         data_item['ubicacion'] = ubicacion
         if 'dorm' in extradata : data_item['dorm']  = extradata['dorm'] 
@@ -70,5 +70,4 @@ for link in range(1,3):
 
 
     df_final = pd.concat(data_list)
-
-print(df_final)
+    #df_final.to_csv('deptosDataset.csv', index=False, encoding='utf-8')
